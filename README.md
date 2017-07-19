@@ -16,3 +16,6 @@ Many of the functions of the calib3d module relate to the pinhole camera model f
 | findFundamentalMat   |       | *1&2*  |  |  |  |  |  | **X** |
 | findFundamentalMat   |       | *1&2*  |  |  |  |  |  |  | **X** |
 | stereoRectify   |     |  | *1&2*  |*1&2*  | *X* | *X*  |  |  |  | **1&2** | **1&2** | **X** |
+| stereoRectifyUncalibrated |  | *1&2*  |  |  |  |  |  | *X* | **1&2**
+| computeCorrespondEpilines |  | *1*  |  |  |  |  |  | *X* 
+| reprojectImageTo3D |  | *disparity* |  |  |  |  |  |  |  |  |  | *X* | **image3d**
