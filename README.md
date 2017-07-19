@@ -12,5 +12,7 @@ Many of the functions of the calib3d module relate to the pinhole camera model f
 | calibrateCamera    | *X*   | *1* | **X** | **X** | **X** | **X** |
 | projectPoints      | *X*   | **1** | *X* | *X* | *X* | *X*
 | stereoCalibrate    | *X*   | *1&2* | **1&2** | **1&2** | **X** | **X** | **X** | **X**
-| findEssentialMat   |       | *1&2  | *foc/pp* |  |  |  | **X** |
-| findFundamentalMat   |       | *1&2  |  |  |  |  |  | **X** |
+| findEssentialMat   |       | *1&2*  | *foc/pp* |  |  |  | **X** |
+| findFundamentalMat   |       | *1&2*  |  |  |  |  |  | **X** |
+| findFundamentalMat   |       | *1&2*  |  |  |  |  |  |  | **X** |
+| stereoRectify   |     |  | *1&2*  |*1&2*  | *X* | *X*  |  |  |  | **1&2** | **1&2** | **X** |
