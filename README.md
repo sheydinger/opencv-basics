@@ -36,8 +36,11 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 | triangulatePoints |  | *1&2* |  |  |  |  |  |  |  |  | *P1&P2* |  | **points4D**
 | solvePnP | *X* | *1* | *X* | *X* | **X** | **X** |  |  |  |  |  |  | 
 | solvePnPRansac | *X* | *1* | *X* | *X* | **X** | **X** |  |  |  |  |  |  | 
+|   |  |  |  |  |  |  |  |  |  |  |  |  | 
 | **[core](http://docs.opencv.org/3.2.0/d0/de1/group__core.html)**
-| q |  |  |  |  |  |  |  |  |  |  |  |  | 
-| q |  |  |  |  |  |  |  |  |  |  |  |  | 
+| perspectiveTransform |  | *X* |  |  |  |  |  |  | *X* |  |  |  | **points**
+|   |  |  |  |  |  |  |  |  |  |  |  |  | 
+| **[imgproc](http://docs.opencv.org/3.2.0/d7/dbd/group__imgproc.html)**
+ 
 
 
