@@ -5,7 +5,6 @@ Simple demonstrations of basic use of OpenCV
 Many of the functions of the calib3d module relate to the pinhole camera model found in the Detailed Description on the
 [Camera Calibration](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html) page and below.  Often, you'll have some of the values and want to know which function to use to solve for the unknown.  The table below shows inputs in *italic* and outputs in **bold**.
 
-<div style="font-size: 2.3em">hi</div>
 
 ```
   | u |    | fx   0  cx || R R R Tx|| X |
@@ -31,11 +30,13 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 |  |  |  |  |  |  |  |  |  |  |  |  |  | 
 | decomposeEssentialMat |  |  |  |  | *1&2* | *X* | **X** |  |  |  |  |  | 
 | decomposeHomographyMat |  |  | *X(K)* |  | **multiple** | **multiple** |  |  | *X* |  |  |  | 
-| decomposeProjectionMatrix |  |  |  |  |  |  |  |  |  |  |  |  | 
-| recoverPose |  |  |  |  |  |  |  |  |  |  |  |  | 
-| triangulatePoints |  |  |  |  |  |  |  |  |  |  |  |  | 
-| solvePnP |  |  |  |  |  |  |  |  |  |  |  |  | 
-| solvePnPRansac |  |  |  |  |  |  |  |  |  |  |  |  | 
+| decomposeProjectionMatrix |  |  | **X** |  | **X** | **X** |  |  |  |  | *P* |  | 
+|  |  |  |  |  |  |  |  |  |  |  |  |  | 
+| recoverPose |  | *1&2* | foc/pp |  | **X** | **X** | *X* |  |  |  |  |  | 
+| triangulatePoints |  | *1&2* |  |  |  |  |  |  |  |  | *P1&P2* |  | **points4D**
+| solvePnP | *X* | *1* | *X* | *X* | **X** | **X** |  |  |  |  |  |  | 
+| solvePnPRansac | *X* | *1* | *X* | *X* | **X** | **X** |  |  |  |  |  |  | 
+| **[core](http://docs.opencv.org/3.2.0/d0/de1/group__core.html)**
 | q |  |  |  |  |  |  |  |  |  |  |  |  | 
 | q |  |  |  |  |  |  |  |  |  |  |  |  | 
 
