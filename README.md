@@ -17,7 +17,7 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 
 | Function           | objPts           | pts1/2  | M  | distort | R | T | E | F | H | R1/R2 | P1/P2 | Q | misc
 | ------------------ |:-------------:|:-----:|:------:|:-----:|:--:|:--:| -- | -- | -- | -- | -- | -- | ----
-| **calib3d**
+| **[calib3d](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html)**
 | calibrateCamera    | *X*   | *1* | **X** | **X** | **X** | **X** |
 | projectPoints      | *X*   | **1** | *X* | *X* | *X* | *X*
 | stereoCalibrate    | *X*   | *1&2* | **1&2** | **1&2** | **X** | **X** | **X** | **X**
