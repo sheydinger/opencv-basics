@@ -3,13 +3,16 @@ Simple demonstrations of basic use of OpenCV
 
 ## calib3d
 Many of the functions of the calib3d module relate to the pinhole camera model found in the Detailed Description on the
-[Camera Calibration](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html) page.  Often, you'll have some of the values and want to know which function to use to solve for the unknown.  The table below shows inputs in *italic* and outputs in **bold**.
+[Camera Calibration](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html) page and below.  Often, you'll have some of the values and want to know which function to use to solve for the unknown.  The table below shows inputs in *italic* and outputs in **bold**.
 
-  | u |    | fx   0  cx || R R R Tx|| X |<br />
-s | v |  = |  0  fy  cy || R R R Ty|| Y |<br />
-  | 1 |    |  0   0   1 || R R R Tz|| Z |<br />
-                                    | 1 |<br />
+<div style="font-size: 2.3em">hi</div>
 
+```
+  | u |    | fx   0  cx || R R R Tx|| X |
+s | v |  = |  0  fy  cy || R R R Ty|| Y |
+  | 1 |    |  0   0   1 || R R R Tz|| Z |
+                                    | 1 |
+```
 
 
 | Function           | objPts           | pts1/2  | M  | distort | R | T | E | F | H | R1/R2 | P1/P2 | Q | misc
