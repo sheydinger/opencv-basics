@@ -7,6 +7,17 @@ Structures
 - [Mat](http://docs.opencv.org/3.2.0/d3/d63/classcv_1_1Mat.html)
 - [Rect](http://docs.opencv.org/3.2.0/d2/d44/classcv_1_1Rect__.html#afb53dd5c7f9a57ecb3d50d62d2d6dd14)
 - [Size](http://docs.opencv.org/3.2.0/d6/d50/classcv_1_1Size__.html)
+* Image Processing
+  * [Image Filtering](http://docs.opencv.org/3.2.0/d4/d86/group__imgproc__filter.html)
+    * [blur](http://docs.opencv.org/3.2.0/d4/d86/group__imgproc__filter.html#ga8c45db9afe636703801b0b2e440fce37)
+    * [dilate](http://docs.opencv.org/3.2.0/d4/d86/group__imgproc__filter.html#ga4ff0f3318642c4f469d0e11f242f3b6c)
+    * [erode](http://docs.opencv.org/3.2.0/d4/d86/group__imgproc__filter.html#gaeb1e0c1033e3f6b891a25d0511362aeb)
+    * [GaussianBlur](http://docs.opencv.org/3.2.0/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1)
+  * [Geometric Image Transformations](http://docs.opencv.org/3.2.0/da/d54/group__imgproc__transform.html)
+* Calib3d
+  * [Camera Calibration and 3D Reconstruction](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html)
+    * [calibrateCamera](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga3207604e4b1a1758aa66acb6ed5aa65d)
+    * [findChessboardCorners](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga93efa9b0aa890de240ca32b11253dd4a)
 
 
 ## 3D to 2D Projection Equation
