@@ -1,7 +1,7 @@
 # opencv-basics
 Simple demonstrations of basic use of OpenCV
 
-## calib3d
+### 3D to 2D Projection Equation
 Many of the functions of the calib3d module relate to the pinhole camera model found in the Detailed Description on the
 [Camera Calibration](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html) page and below.  Often, you'll have some of the values and want to know which function to use to solve for the unknown.  The table below shows inputs in *italic* and outputs in **bold**.
 
@@ -42,6 +42,9 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 |   |  |  |  |  |  |  |  |  |  |  |  |  | 
 | **[imgproc](http://docs.opencv.org/3.2.0/d7/dbd/group__imgproc.html)**
 | initUndistortRectifyMap |  |  | *X* | *X* |  |  |  |  |  | *X* | *X* |  | **mapx/y**
-| remap |  |  |  |  |  |  |  |  |  |  |  |  |
+| remap |  | *srcImg* |  |  |  |  |  |  |  |  |  |  | *mapx/y***dstImg**
+| undistort |  | *srcImg* | *X* | *X* |  |  |  |  |  |  |  |  | **dstImg**
+| undistortPoints |  | *X* | *X* | *X* |  |  |  |  |  | *X* | *X* |  | **points**
+| warpPerspective |  | *srcImg* |  |  |  |  |  |  | *X* |  |  |  | **dstImg**
 
 
