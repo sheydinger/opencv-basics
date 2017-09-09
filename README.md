@@ -7,6 +7,7 @@ Structures
 - [Mat](http://docs.opencv.org/3.2.0/d3/d63/classcv_1_1Mat.html)
 - [Rect](http://docs.opencv.org/3.2.0/d2/d44/classcv_1_1Rect__.html#afb53dd5c7f9a57ecb3d50d62d2d6dd14)
 - [Size](http://docs.opencv.org/3.2.0/d6/d50/classcv_1_1Size__.html)
+- [RotatedRect](http://docs.opencv.org/3.2.0/db/dd6/classcv_1_1RotatedRect.html)
 * Image Processing
   * [Image Filtering](http://docs.opencv.org/3.2.0/d4/d86/group__imgproc__filter.html)
     * [blur](http://docs.opencv.org/3.2.0/d4/d86/group__imgproc__filter.html#ga8c45db9afe636703801b0b2e440fce37)
@@ -32,6 +33,27 @@ Structures
     * [drawContours](http://docs.opencv.org/3.2.0/d6/d6e/group__imgproc__draw.html#ga746c0625f1781f1ffc9056259103edbc)
   * [Color Maps in OpenCV](http://docs.opencv.org/3.2.0/d3/d50/group__imgproc__colormap.html)
     * [applyColorMap](http://docs.opencv.org/3.2.0/d3/d50/group__imgproc__colormap.html#gadf478a5e5ff49d8aa24e726ea6f65d15)
+  * [Histograms](http://docs.opencv.org/3.2.0/d6/dc7/group__imgproc__hist.html)
+    * [calcBackProject](http://docs.opencv.org/3.2.0/d6/dc7/group__imgproc__hist.html#ga3a0af640716b456c3d14af8aee12e3ca)
+    * [calcHist](http://docs.opencv.org/3.2.0/d6/dc7/group__imgproc__hist.html#ga4b2b5fd75503ff9e6844cc4dcdaed35d)
+    * [compareHist](http://docs.opencv.org/3.2.0/d6/dc7/group__imgproc__hist.html#gaf4190090efa5c47cb367cf97a9a519bd)
+    * [equalizeHist](http://docs.opencv.org/3.2.0/d6/dc7/group__imgproc__hist.html#ga7e54091f0c937d49bf84152a16f76d6e)
+  * [Structural Analysis and Shape Descriptors](http://docs.opencv.org/3.2.0/d3/dc0/group__imgproc__shape.html)
+    * [findContours](http://docs.opencv.org/3.2.0/d3/dc0/group__imgproc__shape.html#ga17ed9f5d79ae97bd4c7cf18403e1689a)
+    * [approxPolyDP](http://docs.opencv.org/3.2.0/d3/dc0/group__imgproc__shape.html#ga0012a5fdaea70b8a9970165d98722b4c)
+    * [arcLength](http://docs.opencv.org/3.2.0/d3/dc0/group__imgproc__shape.html#ga8d26483c636be6b35c3ec6335798a47c)
+    * [contourArea](http://docs.opencv.org/3.2.0/d3/dc0/group__imgproc__shape.html#ga2c759ed9f497d4a618048a2f56dc97f1)
+    * [pointPolygonTest](http://docs.opencv.org/3.2.0/d3/dc0/group__imgproc__shape.html#ga1a539e8db2135af2566103705d7a5722)
+    * [HuMoments](http://docs.opencv.org/3.2.0/d3/dc0/group__imgproc__shape.html#ga6d6ac1b519cba25190119afe3a52c1cc)
+  * [Motion Analysis and Object Tracking](http://docs.opencv.org/3.2.0/d7/df3/group__imgproc__motion.html)
+    * [phaseCorrelate](http://docs.opencv.org/3.2.0/d7/df3/group__imgproc__motion.html#ga552420a2ace9ef3fb053cd630fdb4952)
+  * [Feature Detection](http://docs.opencv.org/3.2.0/dd/d1a/group__imgproc__feature.html)
+    * [Canny](http://docs.opencv.org/3.2.0/dd/d1a/group__imgproc__feature.html#ga04723e007ed888ddf11d9ba04e2232de)
+    * [cornerHarris](http://docs.opencv.org/3.2.0/dd/d1a/group__imgproc__feature.html#gac1fc3598018010880e370e2f709b4345)
+    * [goodFeaturesToTrack](http://docs.opencv.org/3.2.0/dd/d1a/group__imgproc__feature.html#ga1d6bb77486c8f92d79c8793ad995d541)
+    * [HoughLines](http://docs.opencv.org/3.2.0/dd/d1a/group__imgproc__feature.html#ga46b4e588934f6c8dfd509cc6e0e4545a)
+  * [Object Detection](http://docs.opencv.org/3.2.0/df/dfb/group__imgproc__object.html)
+    * [matchTemplate](http://docs.opencv.org/3.2.0/df/dfb/group__imgproc__object.html#ga586ebfb0a7fb604b35a23d85391329be)
 * Calib3d
   * [Camera Calibration and 3D Reconstruction](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html)
     * [calibrateCamera](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga3207604e4b1a1758aa66acb6ed5aa65d)
@@ -77,6 +99,7 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 | **core Operations on Arrays**
 | [perspectiveTransform](http://docs.opencv.org/3.2.0/d2/de8/group__core__array.html#gad327659ac03e5fd6894b90025e6900a7) |  | *X* |  |  |  |  |  |  | *X* |  |  |  | **points**
 |   |  |  |  |  |  |  |  |  |  |  |  |  | 
+| Function           | objPts           | pts1/2  | M  | distort | R | T | E | F | H | R1/R2 | P1/P2 | Q | misc
 | **imgproc Geometric Image Transformations**
 | [initUndistortRectifyMap](http://docs.opencv.org/3.2.0/da/d54/group__imgproc__transform.html#ga7dfb72c9cf9780a347fbe3d1c47e5d5a) |  |  | *X* | *X* |  |  |  |  |  | *X* | *X* |  | **mapx/y**
 | [remap](http://docs.opencv.org/3.2.0/da/d54/group__imgproc__transform.html#gab75ef31ce5cdfb5c44b6da5f3b908ea4) |  | *srcImg* |  |  |  |  |  |  |  |  |  |  | *mapx/y***dstImg**
