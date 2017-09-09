@@ -1,7 +1,15 @@
 # opencv-basics
 Simple demonstrations of basic use of OpenCV
 
-### 3D to 2D Projection Equation
+## Documentation (3.2) Links
+Structures
+- [Affine3](http://docs.opencv.org/3.2.0/dd/d99/classcv_1_1Affine3.html)
+- [Mat](http://docs.opencv.org/3.2.0/d3/d63/classcv_1_1Mat.html)
+- [Rect](http://docs.opencv.org/3.2.0/d2/d44/classcv_1_1Rect__.html#afb53dd5c7f9a57ecb3d50d62d2d6dd14)
+- [Size](http://docs.opencv.org/3.2.0/d6/d50/classcv_1_1Size__.html)
+
+
+## 3D to 2D Projection Equation
 Many of the functions of the calib3d module relate to the pinhole camera model found in the Detailed Description on the
 [Camera Calibration](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html) page and below.  Often, you'll have some of the values and want to know which function to use to solve for the unknown.  The table below shows inputs in *italic* and outputs in **bold**.
 
