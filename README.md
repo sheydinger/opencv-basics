@@ -41,6 +41,7 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 | perspectiveTransform |  | *X* |  |  |  |  |  |  | *X* |  |  |  | **points**
 |   |  |  |  |  |  |  |  |  |  |  |  |  | 
 | **[imgproc](http://docs.opencv.org/3.2.0/d7/dbd/group__imgproc.html)**
- 
+| initUndistortRectifyMap |  |  | *X* | *X* |  |  |  |  |  | *X* | *X* |  | **mapx/y**
+| remap |  |  |  |  |  |  |  |  |  |  |  |  |
 
 
