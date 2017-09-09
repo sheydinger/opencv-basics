@@ -16,7 +16,7 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 
 | Function           | objPts           | pts1/2  | M  | distort | R | T | E | F | H | R1/R2 | P1/P2 | Q | misc
 | ------------------ |:-------------:|:-----:|:------:|:-----:|:--:|:--:| -- | -- | -- | -- | -- | -- | ----
-| **[calib3d](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html)**
+| **calib3d**
 | [calibrateCamera](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga3207604e4b1a1758aa66acb6ed5aa65d)    | *X*   | *1* | **X** | **X** | **X** | **X** |
 | [projectPoints](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga1019495a2c8d1743ed5cc23fa0daff8c)      | *X*   | **1** | *X* | *X* | *X* | *X*
 | [stereoCalibrate](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga246253dcc6de2e0376c599e7d692303a)    | *X*   | *1&2* | **1&2** | **1&2** | **X** | **X** | **X** | **X**
@@ -28,17 +28,17 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 | [computeCorrespondEpilines](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga19e3401c94c44b47c229be6e51d158b7) |  | *1*  |  |  |  |  |  | *X* 
 | [reprojectImageTo3D](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga1bc1152bd57d63bc524204f21fde6e02) |  | *disparity* |  |  |  |  |  |  |  |  |  | *X* | **image3d**
 |  |  |  |  |  |  |  |  |  |  |  |  |  | 
-| decomposeEssentialMat |  |  |  |  | *1&2* | *X* | **X** |  |  |  |  |  | 
-| decomposeHomographyMat |  |  | *X(K)* |  | **multiple** | **multiple** |  |  | *X* |  |  |  | 
-| decomposeProjectionMatrix |  |  | **X** |  | **X** | **X** |  |  |  |  | *P* |  | 
+| [decomposeEssentialMat](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga54a2f5b3f8aeaf6c76d4a31dece85d5d) |  |  |  |  | *1&2* | *X* | **X** |  |  |  |  |  | 
+| [decomposeHomographyMat](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga7f60bdff78833d1e3fd6d9d0fd538d92) |  |  | *X(K)* |  | **multiple** | **multiple** |  |  | *X* |  |  |  | 
+| [decomposeProjectionMatrix](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#gaaae5a7899faa1ffdf268cd9088940248) |  |  | **X** |  | **X** | **X** |  |  |  |  | *P* |  | 
 |  |  |  |  |  |  |  |  |  |  |  |  |  | 
-| recoverPose |  | *1&2* | foc/pp |  | **X** | **X** | *X* |  |  |  |  |  | 
-| triangulatePoints |  | *1&2* |  |  |  |  |  |  |  |  | *P1&P2* |  | **points4D**
-| solvePnP | *X* | *1* | *X* | *X* | **X** | **X** |  |  |  |  |  |  | 
-| solvePnPRansac | *X* | *1* | *X* | *X* | **X** | **X** |  |  |  |  |  |  | 
+| [recoverPose](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#gadb7d2dfcc184c1d2f496d8639f4371c0) |  | *1&2* | foc/pp |  | **X** | **X** | *X* |  |  |  |  |  | 
+| [triangulatePoints](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#gad3fc9a0c82b08df034234979960b778c) |  | *1&2* |  |  |  |  |  |  |  |  | *P1&P2* |  | **points4D**
+| [solvePnP](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga549c2075fac14829ff4a58bc931c033d) | *X* | *1* | *X* | *X* | **X** | **X** |  |  |  |  |  |  | 
+| [solvePnPRansac](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga50620f0e26e02caa2e9adc07b5fbf24e) | *X* | *1* | *X* | *X* | **X** | **X** |  |  |  |  |  |  | 
 |   |  |  |  |  |  |  |  |  |  |  |  |  | 
-| **[core](http://docs.opencv.org/3.2.0/d0/de1/group__core.html)**
-| perspectiveTransform |  | *X* |  |  |  |  |  |  | *X* |  |  |  | **points**
+| **[core Operations on Arrays](http://docs.opencv.org/3.2.0/d0/de1/group__core.html)**
+| [perspectiveTransform](http://docs.opencv.org/3.2.0/d2/de8/group__core__array.html#gad327659ac03e5fd6894b90025e6900a7) |  | *X* |  |  |  |  |  |  | *X* |  |  |  | **points**
 |   |  |  |  |  |  |  |  |  |  |  |  |  | 
 | **[imgproc](http://docs.opencv.org/3.2.0/d7/dbd/group__imgproc.html)**
 | initUndistortRectifyMap |  |  | *X* | *X* |  |  |  |  |  | *X* | *X* |  | **mapx/y**
