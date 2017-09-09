@@ -19,14 +19,24 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 | ------------------ |:-------------:|:-----:|:------:|:-----:|:--:|:--:| -- | -- | -- | -- | -- | -- | ----
 | **[calib3d](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html)**
 | [calibrateCamera](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga3207604e4b1a1758aa66acb6ed5aa65d)    | *X*   | *1* | **X** | **X** | **X** | **X** |
-| projectPoints      | *X*   | **1** | *X* | *X* | *X* | *X*
+| [projectPoints](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga1019495a2c8d1743ed5cc23fa0daff8c)      | *X*   | **1** | *X* | *X* | *X* | *X*
 | stereoCalibrate    | *X*   | *1&2* | **1&2** | **1&2** | **X** | **X** | **X** | **X**
 | findEssentialMat   |       | *1&2*  | *foc/pp* |  |  |  | **X** |
 | findFundamentalMat   |       | *1&2*  |  |  |  |  |  | **X** |
-| findFundamentalMat   |       | *1&2*  |  |  |  |  |  |  | **X** |
+| findHomography   |       | *1&2*  |  |  |  |  |  |  | **X** |
 | stereoRectify   |     |  | *1&2*  |*1&2*  | *X* | *X*  |  |  |  | **1&2** | **1&2** | **X** |
 | stereoRectifyUncalibrated |  | *1&2*  |  |  |  |  |  | *X* | **1&2**
 | computeCorrespondEpilines |  | *1*  |  |  |  |  |  | *X* 
 | reprojectImageTo3D |  | *disparity* |  |  |  |  |  |  |  |  |  | *X* | **image3d**
+|  |  |  |  |  |  |  |  |  |  |  |  |  | 
+| decomposeEssentialMat |  |  |  |  | *1&2* | *X* | **X** |  |  |  |  |  | 
+| decomposeHomographyMat |  |  | *X(K)* |  | **multiple** | **multiple** |  |  | *X* |  |  |  | 
+| decomposeProjectionMatrix |  |  |  |  |  |  |  |  |  |  |  |  | 
+| recoverPose |  |  |  |  |  |  |  |  |  |  |  |  | 
+| triangulatePoints |  |  |  |  |  |  |  |  |  |  |  |  | 
+| solvePnP |  |  |  |  |  |  |  |  |  |  |  |  | 
+| solvePnPRansac |  |  |  |  |  |  |  |  |  |  |  |  | 
+| q |  |  |  |  |  |  |  |  |  |  |  |  | 
+| q |  |  |  |  |  |  |  |  |  |  |  |  | 
 
 
