@@ -37,14 +37,14 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 | [solvePnP](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga549c2075fac14829ff4a58bc931c033d) | *X* | *1* | *X* | *X* | **X** | **X** |  |  |  |  |  |  | 
 | [solvePnPRansac](http://docs.opencv.org/3.2.0/d9/d0c/group__calib3d.html#ga50620f0e26e02caa2e9adc07b5fbf24e) | *X* | *1* | *X* | *X* | **X** | **X** |  |  |  |  |  |  | 
 |   |  |  |  |  |  |  |  |  |  |  |  |  | 
-| **[core Operations on Arrays](http://docs.opencv.org/3.2.0/d0/de1/group__core.html)**
+| **core Operations on Arrays**
 | [perspectiveTransform](http://docs.opencv.org/3.2.0/d2/de8/group__core__array.html#gad327659ac03e5fd6894b90025e6900a7) |  | *X* |  |  |  |  |  |  | *X* |  |  |  | **points**
 |   |  |  |  |  |  |  |  |  |  |  |  |  | 
-| **[imgproc](http://docs.opencv.org/3.2.0/d7/dbd/group__imgproc.html)**
-| initUndistortRectifyMap |  |  | *X* | *X* |  |  |  |  |  | *X* | *X* |  | **mapx/y**
-| remap |  | *srcImg* |  |  |  |  |  |  |  |  |  |  | *mapx/y***dstImg**
-| undistort |  | *srcImg* | *X* | *X* |  |  |  |  |  |  |  |  | **dstImg**
-| undistortPoints |  | *X* | *X* | *X* |  |  |  |  |  | *X* | *X* |  | **points**
-| warpPerspective |  | *srcImg* |  |  |  |  |  |  | *X* |  |  |  | **dstImg**
+| **imgproc Geometric Image Transformation**
+| [initUndistortRectifyMap](http://docs.opencv.org/3.2.0/da/d54/group__imgproc__transform.html#ga7dfb72c9cf9780a347fbe3d1c47e5d5a) |  |  | *X* | *X* |  |  |  |  |  | *X* | *X* |  | **mapx/y**
+| [remap](http://docs.opencv.org/3.2.0/da/d54/group__imgproc__transform.html#gab75ef31ce5cdfb5c44b6da5f3b908ea4) |  | *srcImg* |  |  |  |  |  |  |  |  |  |  | *mapx/y***dstImg**
+| [undistort](http://docs.opencv.org/3.2.0/da/d54/group__imgproc__transform.html#ga69f2545a8b62a6b0fc2ee060dc30559d) |  | *srcImg* | *X* | *X* |  |  |  |  |  |  |  |  | **dstImg**
+| [undistortPoints](http://docs.opencv.org/3.2.0/da/d54/group__imgproc__transform.html#ga55c716492470bfe86b0ee9bf3a1f0f7e) |  | *X* | *X* | *X* |  |  |  |  |  | *X* | *X* |  | **points**
+| [warpPerspective](http://docs.opencv.org/3.2.0/da/d54/group__imgproc__transform.html#gaf73673a7e8e18ec6963e3774e6a94b87) |  | *srcImg* |  |  |  |  |  |  | *X* |  |  |  | **dstImg**
 
 
