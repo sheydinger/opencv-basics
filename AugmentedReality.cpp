@@ -1,4 +1,3 @@
-#include <time.h>
 #include "opencv2/opencv.hpp"
 
 /*
@@ -8,30 +7,29 @@
 
 int main(int argc, const char * argv[]) {
     
-    int frameCount = 0;
-    clock_t start = clock();
-    
     cv::Mat frame;
     
     cv::VideoCapture cap(0);
     
-    std::cout << "FPS " << cap.get(CV_CAP_PROP_FPS) << " FPS\n";
-    std::cout << "WIDTH " << cap.get(CV_CAP_PROP_FRAME_WIDTH) << "\n";
-    std::cout << "HEIGHT " << cap.get(CV_CAP_PROP_FRAME_HEIGHT) << "\n";
-    
     while (1)
     {
         cap.read(frame);
+        
+        // Sluggish if the image is too big.
+        if (frame.cols > 720 || frame.rows > 720)
+            cv::resize(frame, frame, cv::Size(0,0), 0.5, 0.5);
+        
+        std::vector<cv::Point2f> corners;
+        bool patternFound = cv::findChessboardCorners(frame, cv::Size(5,5), corners);
+        
+        if (patternFound)
+            cv::drawChessboardCorners(frame, cv::Size(5,5), cv::Mat(corners), patternFound);
         
         cv::imshow("Camera", frame);
         
         // Press ESC to exit.
         if (cv::waitKey(1) == 27)
             exit(0);
-                
-        frameCount++;
-        if (frameCount % 20 == 0)
-            std::cout << ((float) frameCount / ((float) (clock() - start) / (float) 1000000.f)) << "\n";
     };
     
     return 0;
