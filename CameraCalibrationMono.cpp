@@ -6,6 +6,10 @@
  */
 
 
+// If LIVE_VIDEO_FEED is defined, use a live video feed, otherwise
+// read from files.
+//#define LIVE_VIDEO_FEED
+
 int main(int argc, const char * argv[]) {
     
     // Change this according to your chessboard size!
@@ -14,27 +18,10 @@ int main(int argc, const char * argv[]) {
     // The captured frame, and a gray version for sub-pixel accuracy.
     cv::Mat frame, frameGray;
     
+    cv::Size imageSize;
+    
     // The number of frames that have been captured.
     int frameCount = 0;
-    
-    // Setup to capture live video frames.
-    cv::VideoCapture cap(0);
-    
-    if (!cap.isOpened())
-    {
-        std::cout << "VideoCapture not able to open.";
-        exit(1);
-    }
-    
-    //    cap.set(CV_CAP_PROP_FRAME_WIDTH, 640);
-    //    cap.set(CV_CAP_PROP_FRAME_HEIGHT, 480);
-    
-    // Show the frame dimensions.  The camera matrix should indicate a center
-    // in the middle of the image.
-    std::cout << "WIDTH " << cap.get(CV_CAP_PROP_FRAME_WIDTH) << "\n";
-    std::cout << "HEIGHT " << cap.get(CV_CAP_PROP_FRAME_HEIGHT) << "\n";
-    
-    cv::Size imageSize(cap.get(CV_CAP_PROP_FRAME_WIDTH), cap.get(CV_CAP_PROP_FRAME_HEIGHT));
     
     // Record corresponding object and image points for multiple image captures.
     std::vector<std::vector<cv::Point2f> > imagePoints;
@@ -55,6 +42,26 @@ int main(int argc, const char * argv[]) {
         for (int c=0; c<chessboardSize.width; c++)
             objectCorners.push_back(cv::Point3f(c, r, 0.0f)); // Point2f(x,y)
     
+#ifdef LIVE_VIDEO_FEED
+    // Setup to capture live video frames.
+    cv::VideoCapture cap(0);
+    
+    if (!cap.isOpened())
+    {
+        std::cout << "VideoCapture not able to open.";
+        exit(1);
+    }
+    
+    //    cap.set(CV_CAP_PROP_FRAME_WIDTH, 640);
+    //    cap.set(CV_CAP_PROP_FRAME_HEIGHT, 480);
+    
+    // Show the frame dimensions.  The camera matrix should indicate a center
+    // in the middle of the image.
+    std::cout << "WIDTH " << cap.get(CV_CAP_PROP_FRAME_WIDTH) << "\n";
+    std::cout << "HEIGHT " << cap.get(CV_CAP_PROP_FRAME_HEIGHT) << "\n";
+    
+    imageSize = cv::Size(cap.get(CV_CAP_PROP_FRAME_WIDTH), cap.get(CV_CAP_PROP_FRAME_HEIGHT));
+    
     int keyPressed;
     
     do
@@ -74,19 +81,19 @@ int main(int argc, const char * argv[]) {
                     char filename[20];
                     sprintf(filename, "Frame%d.jpg", frameCount++);
                     cv::String s(filename);
-                    std::cout << s  << std::endl;
+                    std::cout << s << std::endl;
                     
                     cv::imwrite(filename, frame);
-                    
-                    // Save the points for computation.
-                    objectPoints.push_back(objectCorners);
-                    imagePoints.push_back(imageCorners);
                     
                     // Compute sub-pixel accuracy, cornerSubPix requires grayscale.
                     cv::cvtColor(frame, frameGray, CV_BGR2GRAY);
                     
                     cv::cornerSubPix(frameGray, imageCorners, cv::Size(11,11), cv::Size(-1,-1),
                                      cv::TermCriteria(CV_TERMCRIT_EPS  + CV_TERMCRIT_ITER, 30, 0.1));
+                    
+                    // Save the points for computation.
+                    objectPoints.push_back(objectCorners);
+                    imagePoints.push_back(imageCorners);
                     
                     // Use all captured frames to estimate the camera matrices.
                     cv::calibrateCamera(objectPoints, imagePoints, frame.size(), cameraMatrix, distCoeffs, rvecs, tvecs);
@@ -116,7 +123,50 @@ int main(int argc, const char * argv[]) {
         
         // Press ESC to exit.
     } while (keyPressed != 27);
-    
+#else
+    while (1)
+    {
+        // Read the frame from file.
+        char filename[20];
+        sprintf(filename, "Frame%d.jpg", frameCount++);
+        cv::String s(filename);
+        
+        // Try to read the file.  If not, then stop reading files.
+        frame = cv::imread(filename);
+        if (frame.cols == 0 || frame.rows == 0)
+            break;
+        
+        std::cout << s  << std::endl;
+        
+        imageSize = frame.size();
+        
+        // Find the chessboard corners, to sub-pixel accuracy.
+        bool patternFound = cv::findChessboardCorners(frame, chessboardSize, imageCorners);
+        
+        // Press space to capture a frame.
+        if (patternFound)
+        {
+            cv::drawChessboardCorners(frame, chessboardSize, cv::Mat(imageCorners), patternFound);
+            cv::imshow("Camera", frame);
+            cv::waitKey(500);
+            
+            // Compute sub-pixel accuracy, cornerSubPix requires grayscale.
+            cv::cvtColor(frame, frameGray, CV_BGR2GRAY);
+            
+            cv::cornerSubPix(frameGray, imageCorners, cv::Size(11,11), cv::Size(-1,-1),
+                             cv::TermCriteria(CV_TERMCRIT_EPS  + CV_TERMCRIT_ITER, 30, 0.1));
+            
+            // Save the points for computation.
+            objectPoints.push_back(objectCorners);
+            imagePoints.push_back(imageCorners);
+        }
+        
+        // Use all captured frames to estimate the camera matrices.
+        cv::calibrateCamera(objectPoints, imagePoints, frame.size(), cameraMatrix, distCoeffs, rvecs, tvecs);
+        
+        std::cout << cameraMatrix << std::endl;
+    };
+#endif
     
     // Write results
     
@@ -126,6 +176,8 @@ int main(int argc, const char * argv[]) {
     {
         fs << "cameraMatrix" << cameraMatrix;
         fs << "distCoeffs" << distCoeffs;
+        fs << "chessboardSize" << chessboardSize;
+        fs << "imageSize" << imageSize;
         fs.release();
     }
     
