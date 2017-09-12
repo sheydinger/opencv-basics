@@ -107,4 +107,17 @@ s | v |  = |  0  fy  cy || R R R Ty|| Y |
 | [undistortPoints](http://docs.opencv.org/3.2.0/da/d54/group__imgproc__transform.html#ga55c716492470bfe86b0ee9bf3a1f0f7e) |  | *X* | *X* | *X* |  |  |  |  |  | *X* | *X* |  | **points**
 | [warpPerspective](http://docs.opencv.org/3.2.0/da/d54/group__imgproc__transform.html#gaf73673a7e8e18ec6963e3774e6a94b87) |  | *srcImg* |  |  |  |  |  |  | *X* |  |  |  | **dstImg**
 
+## Mat Types
+
+
+
+| Type    | C1 | C2 | C3 | C4
+| ------- |:--:|:--:|:--:|:--:
+| CV_8U | 0 | 8 | 16 | 24
+| CV_8S | 1 | 9 | 17 | 25
+| CV_16U | 2 | 10 | 18 | 26
+| CV_16S | 3 | 11 | 19 | 27
+| CV_32S | 4 | 12 | 20 | 28
+| CV_32F | 5 | 13 | 21 | 29
+| CV_64F | 6 | 14 | 22 | 30
 
