@@ -171,13 +171,12 @@ int main(int argc, const char * argv[]) {
                     // The default for the flags parameter is CV_CALIB_FIX_INTRINSIC which causes the
                     // camera matrices to remain as identity matrices.  Set it to 0 to get estimates
                     // for the camera matrices.
-                    double reprojError = cv::stereoCalibrate(objectPoints, imagePointsL, imagePointsR,
-                                                             cameraMatrixL, distCoeffsL, cameraMatrixR, distCoeffsR,
-                                                             imageSizeL, R, T, E, F, 0);
+                    cv::stereoCalibrate(objectPoints, imagePointsL, imagePointsR,
+                                        cameraMatrixL, distCoeffsL, cameraMatrixR, distCoeffsR,
+                                        imageSizeL, R, T, E, F, 0);
                     
                     std::cout << cameraMatrixL << std::endl << cameraMatrixR << std::endl;
                     std::cout << T << std::endl;
-                    std::cout << "reprojError " << reprojError << std::endl;
                     
                     // Flash GREEN if the picture contains chessboard corners.
                     frameL = cv::Scalar(0,255,0);
@@ -243,9 +242,6 @@ int main(int argc, const char * argv[]) {
                     cv::circle(frame, mousePosition, 4, cv::Scalar(0,255,0), -1);
                     cv::line(frame, pt1, pt2, cv::Scalar(0,255,0));
                 }
-                
-                std::cout << lines[0].x << " " << lines[0].y << " " << lines[0].z << std::endl;
-                std::cout << pt1 << " " << pt2 << std::endl;
             }
         }
         
@@ -301,45 +297,23 @@ int main(int argc, const char * argv[]) {
 #endif
     
     // Write results
-#if 0
+    
     cv::FileStorage fs;
-    fs.open("CameraMatrices.yaml", cv::FileStorage::WRITE);
+    fs.open("CameraMatricesStereo.yaml", cv::FileStorage::WRITE);
     if (fs.isOpened())
     {
-        fs << "cameraMatrix" << cameraMatrix;
-        fs << "distCoeffs" << distCoeffs;
+        fs << "cameraMatrixL" << cameraMatrixL;
+        fs << "distCoeffsL" << distCoeffsL;
+        fs << "cameraMatrixR" << cameraMatrixR;
+        fs << "distCoeffsR" << distCoeffsR;
         fs << "chessboardSize" << chessboardSize;
-        fs << "imageSize" << imageSize;
+        fs << "imageSize" << imageSizeL; // They must be the same size.
+        fs << "R" << R;
+        fs << "T" << T;
+        fs << "E" << E;
+        fs << "F" << F;
         fs.release();
     }
     
-    // Compute some useful characteristics from the camera matrix.
-    
-    // Webcam:           Logitech C310
-    // Specs:            http://support.logitech.com/en_us/product/hd-webcam-c310/specs
-    // Field of View:    60 degrees
-    // Focal Length:     4.4 mm
-    // Optical Res:      1280 x 960 VGA
-    
-    // Sensor Size Info: http://pomeroyprinting.blogspot.com/2014/04/modifying-logitech-c310-hd-webcam.html
-    // Sensor Size:      3.6 mm x 2.7 mm
-    
-    // inputs:
-    double aperatureWidth = 3.6;
-    double aperatureHeight = 2.7;
-    
-    // outputs:
-    double fovx, fovy, focalLength, aspectRatio;
-    cv::Point2d principalPoint;
-    
-    cv::calibrationMatrixValues(cameraMatrix, imageSize, aperatureWidth, aperatureHeight,
-                                fovx, fovy, focalLength, principalPoint, aspectRatio);
-    
-    std::cout << "fovx: " << fovx << std::endl;
-    std::cout << "fovy: " << fovy << std::endl;
-    std::cout << "focalLength: " << focalLength << std::endl;
-    std::cout << "principalPoint: " << principalPoint << std::endl;
-    std::cout << "aspectRatio: " << aspectRatio << std::endl;
-#endif
     return 0;
 }
