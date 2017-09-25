@@ -11,89 +11,55 @@
  */
 
 
-// Generate a CV_32FC2 map the size of the image to cause barrel distortion
-// using the model ru = rd (1 + k rd^2 ), where ru and rd are the undistorted
-// and distorted radii, respectively.  Since this is a cubic equation, search
-// for the solution.  Note that the distorted radius is less than the
-// undistorted radius, hence the barrel shape.
-
 // TODO: Implement cxDelta and cyDelta.
 cv::Mat computeBarrelDistortionMap(cv::Size imageSize, float k = 0.0000002, double cxDelta = 0.0, double cyDelta = 0.0)
 {
-    const int ruOversample = 4;
-    const int rdOversample = 10000;
+    // Find the center of the image assuming no cx or cy deviation, i.e. find the radius.
+    cv::Point2f center(((double) imageSize.width-1.0)/2.0, ((double) imageSize.height-1.0)/2.0);
     
-    // Generate enough values to reach the farthest radius.
-    int ruMax = pow(imageSize.width*imageSize.width*0.25 + imageSize.height*imageSize.height*0.25, 0.5);
+    std::cout << center;
     
-    // Index = ru, output = rd, i.e. rd = f(ru).
-    cv::Mat barrelRadialDistort = cv::Mat::zeros(ruMax*ruOversample, 1, CV_32F);
-    
-    // For every undistorted radius, need to find the distorted radius
-    // which will be less than the undistorted radius.
-    for (int ruX4 = 1, rdXStart = 1; ruX4 < ruMax*ruOversample; ruX4++)
-    {
-        std::cout << ruX4 << " " << (ruX4 / 4.0);
-        
-        float ru = ruX4 / (float) ruOversample;
-        
-        // Keep trying increasing distorted diameters.
-        for (int rdX = rdXStart; rdX < ruMax*rdOversample; rdX++)
-        {
-            float rd = rdX / (float) rdOversample;
-            
-            float ruTest = rd * (1.0 + k * rd*rd);
-            
-            if (ruTest > ru)
-                break;
-            
-            barrelRadialDistort.at<float>(ruX4,0) = rd;
-            
-            // A hueristic.  Don't start search from 0 each time since we know
-            // that the curves are monotonic.
-            rdXStart++;
-        }
-        
-        std::cout << " " << barrelRadialDistort.at<float>(ruX4,0) << std::endl;
-    }
-    
-    // Now that we know how to map each undistorted radius to a distorted radius,
-    // generate a distortion map that can be used to quickly distort an image.
+    // The map, CV_32FC2, indicates for each point of the mapped image from where
+    // in the original image to retrieve the pixel.  The formula for barrel distortion
+    // as a function of the parameter k is: ru = rd (1 + k rd^2).  Note that rd <= ru.
+    // Here, the points of the map are the distorted points and we use the formula to
+    // find the position to take them from the undistorted image.
     cv::Mat map(imageSize, CV_32FC2);
     
-    std::cout << "map.size() " << map.size() << std::endl;
-    
-    //    int c = 0, r = 0;
-    
-    for (int r=0; r<imageSize.height; r++)
-        for (int c=0; c<imageSize.width; c++)
+    for (int y=0; y<imageSize.height; y++)
+        for (int x=0; x<imageSize.width; x++)
         {
-            // Compute the coordinates of each pixel relative to the center.
-            float x = c - (imageSize.width/2) + 0.5f;
-            float y = r - (imageSize.height/2) + 0.5f;
+            cv::Point2f ptd(x-center.x, y-center.y);
             
-            // Compute the radius.
-            float rad = pow((float) (x*x + y*y), 0.5f);
+            // Find the radius of the point in the distorted image, rd.
+            float rd = cv::norm(ptd);
             
-            // Scale the radius, where scale >= 1 since the map determines "for the
-            // present pixel position, from where should the actual pixel be retrieved?"
-            // instead of "for the present pixel position, where should it be moved to?".
-            float scale = rad / barrelRadialDistort.at<float>((int) rad * ruOversample, 0);
-            x *= scale;
-            y *= scale;
+            // Determine the radius of the point in the undistorted image.
+            float ru = rd * (1 + k*rd*rd);
             
-            map.at<cv::Vec2f>(r,c)[0] = x + (imageSize.width/2) - 0.5f;
-            map.at<cv::Vec2f>(r,c)[1] = y + (imageSize.height/2) - 0.5f;
+            if (ptd.y != 0.0 || ptd.x != 0.0)
+            {
+                // Find the angle between the center and the distorted point.
+                float angle = atan2(ptd.y, ptd.x);
+                
+                // Extend a longer line from the center to the new, undistorted point.
+                cv::Point2f ptu(ru * cos(angle), ru * sin(angle));
+                
+                // Adjust relative to the center of the image.
+                ptu += center;
+                
+                map.at<cv::Vec2f>(y,x)[0] = ptu.x;
+                map.at<cv::Vec2f>(y,x)[1] = ptu.y;
+            }
             
-            // This causes the image to be squished to the top half of the frame,
-            // leaving the bottom half all black and thereby revealing the meaning
-            // of the entries of the map: "for the present pixel position, from
-            // where should the actual pixel be retrieved?"
-            // map.at<cv::Vec2f>(r,c)[0] = c;
-            // map.at<cv::Vec2f>(r,c)[1] = r*2;
+            // Don't distort the center pixel.
+            else
+            {
+                map.at<cv::Vec2f>(y,x)[0] = x;
+                map.at<cv::Vec2f>(y,x)[1] = y;
+            }
         }
     
-    std::cout << map(cv::Rect(0,0,5,5));
     return map;
 }
 
@@ -121,17 +87,10 @@ int main(int argc, const char * argv[]) {
     do {
         cap.read(frame);
         
-        //        frame = cv::Mat::zeros(frame.size(), CV_8U);
-        
         for (int r=40; r<frame.rows; r+=40)
             line(frame, cv::Point(0,r), cv::Point(frame.cols,r), cv::Scalar(0,0,255), 1);
         for (int c=40; c<frame.cols; c+=40)
             line(frame, cv::Point(c,0), cv::Point(c,frame.rows), cv::Scalar(0,0,255), 1);
-        
-        //            for (int c=0; c<frame.cols; c+=80)
-        
-        // 1280: 640 320 160 80
-        //  720: 360 180  90 45
         
         cv::remap(frame, frameDistorted, map, cv::noArray(), CV_INTER_LINEAR);
         
