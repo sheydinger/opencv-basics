@@ -1,7 +1,8 @@
 #include "opencv2/opencv.hpp"
 
 /*
- * Objective: Show dots at a fixed distance above a chessboard independent of
+ * Objective: This is a very simple to implement minimal verision of augmented
+ * reality.  Show dots at a fixed distance above a chessboard independent of
  * the orientation of the camera relative to the chessboard.  Use solvePnp()
  * to compute the extrinsics matrix.
  *
@@ -48,7 +49,7 @@ int main(int argc, const char * argv[]) {
         for (int c=0; c<chessboardSize.width; c++)
         {
             objectPoints.push_back(cv::Point3f(c, r, 0.0f)); // Point3f(x,y,z)
-            objectPointsAugmented.push_back(cv::Point3f(c, r, 1.0f));
+            objectPointsAugmented.push_back(cv::Point3f(c, r, -1.0f));
         }
     
     // Capture and process frames, looking for a chessboard and drawing virtual
@@ -57,10 +58,15 @@ int main(int argc, const char * argv[]) {
     
     cv::VideoCapture cap(0);
     
-    while (1)
+    // Set the dimensions to be consistent with the calibration images.
+    cap.set(CV_CAP_PROP_FRAME_WIDTH, imageSize.width);
+    cap.set(CV_CAP_PROP_FRAME_HEIGHT, imageSize.height);
+    
+    do
     {
         cap.read(frame);
         
+        // Find the location of the chessboard corners.
         std::vector<cv::Point2f> corners;
         bool patternFound = cv::findChessboardCorners(frame, chessboardSize, corners);
         
@@ -68,32 +74,36 @@ int main(int argc, const char * argv[]) {
         {
             cv::drawChessboardCorners(frame, chessboardSize, cv::Mat(corners), patternFound);
             
+            // By defining the chessboard as the definition of the world coordinate space
+            // and the location of the chessboard corners in the image, determine the
+            // extrinsics matrix using solvePnP to get the rotation and translation of the
+            // camera relative to the chessboard.
             cv::Mat rvec, tvec;
             bool foundPnP = cv::solvePnP(objectPoints, corners, cameraMatrix, distCoeffs, rvec, tvec);
             
             if (foundPnP)
             {
-                std::cout << rvec << " " << tvec << std::endl;
+                // Show the numeric position of the camera relative to the chessboard.
+                //                std::cout << rvec << " " << tvec << std::endl;
                 
                 // Project the augmented points through the extrinsics matrix (rvec and tvec)
                 // into the 2-D image plane.
                 std::vector<cv::Point2f> cornersAugmented;
                 cv::projectPoints(objectPointsAugmented, rvec, tvec, cameraMatrix, distCoeffs, cornersAugmented);
                 
-                std::cout << cornersAugmented << std::endl;
-                
                 // Draw the augmented points onto the frame.
                 for (int i=0; i<cornersAugmented.size(); i++)
-                    cv::circle(frame, cornersAugmented[i], 2, cv::Scalar(0,255,0), -1);
+                {
+                    cv::circle(frame, cornersAugmented[i], 5, cv::Scalar(0,255,0), -1);
+                    cv::line(frame, cornersAugmented[i], corners[i], cv::Scalar(0,255,0));
+                }
             }
         }
         
         cv::imshow("Camera", frame);
         
         // Press ESC to exit.
-        if (cv::waitKey(1) == 27)
-            exit(0);
-    };
+    } while (cv::waitKey(1) != 27);
     
     return 0;
 }
