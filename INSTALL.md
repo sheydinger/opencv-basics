@@ -21,23 +21,32 @@
 * Preparing to install Ubuntu: Download updates while installing Ubuntu = checked
 * Installation type: Erase disk and install Ubuntu
 * Who are you: Log in automatically
+* After the prompts, restart.
+* When asked to remove the medium, just press Enter.
 
-
+**Restart VM**
+* Devices > Insert Guest Additions CD image...
+* Run the automatically started software when prompted.
 
 **Shared Clipboard, Drag'n'Drop**
 * Settings > General > Advanced
   * Shared Clipboard: Bidirectional
   * Drag'n'Drop: Bidirectional
-* From a terminal, type:
-  * sudo VBoxClient-all stop
-  * sudo VBoxClient-all start
-  * Reboot the virtual machine
+* Reboot the virtual machine
 
 
 **Shared Folders**
 * Check: Auto-mount and Make Permanent
 
 ## cmake-gui
+
+## CUDA
+* sudo apt-get intall build-essential
+* In FireFox, navigate to http:s//developer.nvidia.com/cuda-downloads
+* Choose Legacy Releases
+* CUDA Toolkit 8.0 GA2
+* Linux, x86_64, Ubuntu, 16.04, runfile (local)
+* Download cuda_8.0.61_375.26_linux.run and Save File
 
 ## VTK
 
