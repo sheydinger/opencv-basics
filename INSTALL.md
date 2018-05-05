@@ -13,11 +13,16 @@
 * Settings > General > Advanced
   * Shared Clipboard: Bidirectional
   * Drag'n'Drop: Bidirectional
+* From a terminal, type:
+  * sudo VBoxClient-all stop
+  * sudo VBoxClient-all start
+  * Reboot the virtual machine
 
 
 **Shared Folders**
 * Check: Auto-mount and Make Permanent
 
+## cmake-gui
 
 ## VTK
 
