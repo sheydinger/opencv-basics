@@ -2,13 +2,14 @@
 
 ## Linux VM
 
-
 **Create VM**
 * Open the Oracle VM VirtualBox Manger
 * Press "New"
-  * Name: Ubuntu OpenCV
-  * Type: Linux, Version: Ubuntu (64-bit)
-  * RAM: 4096 MB
+  * Name and operating system
+    * Name: Ubuntu OpenCV
+    * Type: Linux, Version: Ubuntu (64-bit)
+    * Version: Ubuntu (64-bit)
+  * Memory size: 1024 MB
   * Hard disk: Create a virtual hard disk now
   * Hard disk file type: VDI (VirtualBox Disk Image)
   * Storage on physical hard disk: Dynamically allocated
@@ -34,11 +35,38 @@
   * Drag'n'Drop: Bidirectional
 * Reboot the virtual machine
 
-
 **Shared Folders**
 * Check: Auto-mount and Make Permanent
 
 ## cmake-gui
+* sudo apt install cmake-gui
+
+## OpenGL
+If trying to configure in cmake, will get "Could NOT filnd OpenGL".  Need libgl1-mesa-dev:
+* sudo apt install libgl1-mesa-dev
+
+If trying to configure in cmake, will get "X11_Xt_LIB could not be found.  Required for VTK X lib.".  Need libxt-dev:
+* sudo apt install libxt-dev
+
+## Quicktime NO
+* sudo apt install qttools5-dev NO
+* sudo apt update NO
+
+## VTK
+Don't get VTK from github.  Though the tag may show 8.1, it may use 9.0.
+* Download VTK-8.1.0.zip from https://www.vtk.org/download/ within FireFox, save to file.
+* Extract to ~/Documents/VTK-8.1.0
+* Create a directory ~/Documents/VTK-8.1.0-build
+* Open cmake-gui
+  * Where is the source code: ~/Documents/VTK-8.1.0
+  * Where to build the binaries: ~/Documents/VTK-8.1.0-build
+  * Configure
+  * Generate
+* From the VTK-8.1.0-build directory:
+  * make -j2
+  * make install
+  
+## OpenCV
 
 ## CUDA
 * sudo apt-get intall build-essential
@@ -47,12 +75,3 @@
 * CUDA Toolkit 8.0 GA2
 * Linux, x86_64, Ubuntu, 16.04, runfile (local)
 * Download cuda_8.0.61_375.26_linux.run and Save File
-
-## VTK
-
-## Cuda
-https://developer.nvidia.com/cuda-80-ga2-download-archive
-cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
-
-
-## OpenCV
