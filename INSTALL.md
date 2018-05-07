@@ -70,9 +70,22 @@ Don't get VTK from github.  The tags appear to have some errors.
   * sudo make install
   
 ## OpenCV
+* cd ~/Documents
 * git clone https://github.com/opencv/opencv.git
 * git checkout 3.4.1
 * git describe
+* Create a directory ~/Documents/opencv-3.4.1-release  (This will use -O3)
+* Opem cmake-gui
+  * Where is the source code: ~/Documents/opencv
+  * Where to build the binaries: ~/Documents/opencv-3.4.1-release
+  * Configure
+    * ENABLE_CXX11 = checked
+    * CMAKE_BUILD_TYPE = Release
+    * Check the loacation of the VTK
+  * Generate
+* From the opencv-3.4.1-release directory:
+  * make -j2 (A number of processors > 2 may use up all the virtual memory)
+  * sudo make install
 
 ## CUDA
 * sudo apt-get intall build-essential
