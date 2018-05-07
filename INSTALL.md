@@ -38,6 +38,9 @@
 **Shared Folders**
 * Check: Auto-mount and Make Permanent
 
+## git
+* sudo apt install git
+
 ## cmake-gui
 * sudo apt install cmake-gui
 
@@ -48,25 +51,28 @@ If trying to configure in cmake, will get "Could NOT filnd OpenGL".  Need libgl1
 If trying to configure in cmake, will get "X11_Xt_LIB could not be found.  Required for VTK X lib.".  Need libxt-dev:
 * sudo apt install libxt-dev
 
-## Quicktime NO
-* sudo apt install qttools5-dev NO
-* sudo apt update NO
+## Netbeans
+* Download and install Netbeans 8.2, C/C++ x64
 
 ## VTK
-Don't get VTK from github.  Though the tag may show 8.1, it may use 9.0.
-* Download VTK-8.1.0.zip from https://www.vtk.org/download/ within FireFox, save to file.
-* Extract to ~/Documents/VTK-8.1.0
-* Create a directory ~/Documents/VTK-8.1.0-build
+Don't get VTK from github.  The tags appear to have some errors.
+* Download VTK-7.1.1.zip from https://www.vtk.org/download/ within FireFox, save to file.
+* Extract to ~/Documents/VTK-7.1.1
+* Create a directory ~/Documents/VTK-7.1.1-build
 * Open cmake-gui
-  * Where is the source code: ~/Documents/VTK-8.1.0
-  * Where to build the binaries: ~/Documents/VTK-8.1.0-build
+  * Where is the source code: ~/Documents/VTK-7.1.1
+  * Where to build the binaries: ~/Documents/VTK-7.1.1-build
   * Configure
+    * CMAKE_BUILD_TYPE = Release
   * Generate
-* From the VTK-8.1.0-build directory:
+* From the VTK-7.1.1-build directory:
   * make -j2
-  * make install
+  * sudo make install
   
 ## OpenCV
+* git clone https://github.com/opencv/opencv.git
+* git checkout 3.4.1
+* git describe
 
 ## CUDA
 * sudo apt-get intall build-essential
